@@ -1,0 +1,93 @@
+<section class="main">
+  <div class="alert alert-danger text-center w-50 m-auto" *ngIf="popFailed">
+    {{enteredVal}} is not present in the Array.Please Re-check.
+  </div>
+  <div class="alert alert-warning text-center w-50 m-auto" *ngIf="nullCheck">
+    Please Enter a Valid Value.
+  </div>
+  <div class="alert alert-danger text-center w-50 m-auto" *ngIf="addCheck">
+    Please fill the <strong>Position</strong> and <strong>Value</strong> Field.
+  </div>
+  <div class="alert alert-success text-center w-50 m-auto" *ngIf="popSuccess">
+    <strong>{{enteredVal}}</strong> is successfully Deleted.
+  </div>
+  <div class="alert alert-success text-center w-50 m-auto" *ngIf="addSuccess">
+    <strong>Entered Value</strong> is successfully Added.
+  </div>
+
+  <div class="baloon-header">
+    <div *ngFor="let number of arr;let i=index">
+      <div *ngIf="number!=null">
+      <div class="card-title" style="margin: 0;padding: 0;">
+        <div class="index">{{i}}</div>
+      </div>
+      <div class="card-body" style="margin: 0;padding: 0;margin-top: 10px;">
+       <div class="balloon"><div class="num">{{number}}</div></div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="flex-container">
+    <div class="flex1">
+      <h2 class="text-center text-white font-weight-bold">PUSH</h2>
+      <form [formGroup]="reactForm" (ngSubmit)="submitForm()">
+
+      <small class="text-dark font-weight-bold" *ngIf="!reactForm.get('position').valid && reactForm.get('position').touched">Please Enter a Valid Position</small>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" >Position</span>
+        </div>
+        <input type="text" class="form-control" #position formControlName='position'>
+      </div>
+
+      <small class="text-dark font-weight-bold" *ngIf="!reactForm.get('value').valid && reactForm.get('value').touched">Please Enter a Valid Value</small>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Value &nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </div>
+        <input type="text" class="form-control" #val formControlName='value'>
+      </div>
+      <div class="add-button">
+        <button type="submit" class="btn btn-success" (click)="add(position.value,val.value)">ADD</button>
+
+      </div>
+    </form>
+    </div>
+
+    <div class="flex2">
+      <h2 class="text-center text-white font-weight-bold">POP</h2>
+
+      <form [formGroup]="reactForm1" (ngSubmit)="submitForm1()">
+      <small class="text-dark font-weight-bold" *ngIf="!reactForm1.get('RemoveValue').valid && reactForm1.get('RemoveValue').touched">Please Enter a Valid Value to Delete</small>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Value &nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </div>
+        <input type="text" class="form-control" #remval formControlName='RemoveValue'>
+      </div>
+      <div class="remove-button">
+        <button type="submit" class="btn btn-danger" (click)="remove(remval.value)">REMOVE</button>
+
+      </div>
+    </form>
+    </div>
+    
+  </div>
+
+  <div><h2 class="text-center text-white">ALLOCATION</h2> </div>
+  <div class="baloon-footer">
+    <div *ngFor="let number of arr;let i=index">
+      <div>
+      <div class="card-title" style="margin: 0;padding: 0;">
+        <div class="index" style="margin: 0;padding: 0;">{{i}}</div>
+      </div>
+      <div class="card-body" style="margin: 0;padding: 0;margin-top: 10px;">
+         <div class="num1">{{number}}</div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</section>
